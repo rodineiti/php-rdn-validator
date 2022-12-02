@@ -1,10 +1,23 @@
 {
-    "require-dev": {
+    "name": "rodineiti/php-rdn-validator",
+  "description": "This is a library that uses componser as the basic validations",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rodinei Teixeira",
+      "email": "rodineiguitar@gmail.com",
+      "homepage": "https://rdndeveloper.com",
+      "role": "Fullstack Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require-dev": {
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
     	"psr-4": {
-    		"Src\\": "src/"
+    		"RdnValidator\\": "src/"
     	}
     }
 }

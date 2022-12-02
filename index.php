@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Src\Validator\Validator;
+use RdnValidator\Validator\Validator;
 
 if (isset($_POST['submit'])) {
 	$rules = [

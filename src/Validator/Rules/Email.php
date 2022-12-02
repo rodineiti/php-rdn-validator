@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Validator\Rules;
+namespace RdnValidator\Validator\Rules;
 
 class Email
 {

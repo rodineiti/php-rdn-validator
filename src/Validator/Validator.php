@@ -1,11 +1,11 @@
 <?php
 
-namespace Src\Validator;
+namespace RdnValidator\Validator;
 
-use Src\Validator\Rules\Cnpj;
-use Src\Validator\Rules\Cpf;
-use Src\Validator\Rules\Email;
-use Src\Validator\Rules\Required;
+use RdnValidator\Validator\Rules\Cnpj;
+use RdnValidator\Validator\Rules\Cpf;
+use RdnValidator\Validator\Rules\Email;
+use RdnValidator\Validator\Rules\Required;
 
 /**
  * Class to Validator forms

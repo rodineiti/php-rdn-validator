@@ -4,7 +4,7 @@ namespace Unit;
 
 use PHPUnit\Framework\TestCase;
 
-use Src\Validator\Validator;
+use RdnValidator\Validator\Validator;
 
 class ValidatorTest extends TestCase
 {
