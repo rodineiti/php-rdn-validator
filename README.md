@@ -42,4 +42,3 @@ MIT
 
 [//]:#
 [Rodinei Teixeira]: <mailto:rodinei.developer@hotmail.com>
-=======
