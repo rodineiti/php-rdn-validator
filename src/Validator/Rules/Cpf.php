@@ -4,18 +4,30 @@ namespace RdnValidator\Validator\Rules;
 
 class Cpf
 {
+    /**
+     * @var
+     */
     private $value;
 
+    /**
+     * @param $value
+     */
     public function __construct($value)
     {
         $this->value = $value;
     }
 
+    /**
+     * @return bool
+     */
     public function run()
     {
         return $this->isCpf($this->value);
     }
 
+    /**
+     * @return bool
+     */
     public function isCpf()
     {
         $c = preg_replace('/\D/', '', $this->value);

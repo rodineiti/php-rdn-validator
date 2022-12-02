@@ -4,18 +4,30 @@ namespace RdnValidator\Validator\Rules;
 
 class Cnpj
 {
+    /**
+     * @var
+     */
     private $value;
 
+    /**
+     * @param $value
+     */
     public function __construct($value)
     {
         $this->value = $value;
     }
 
+    /**
+     * @return bool
+     */
     public function run()
     {
         return $this->isCnpj($this->value);
     }
 
+    /**
+     * @return bool
+     */
     public function isCnpj()
     {
         $c = preg_replace('/\D/', '', $this->value);
