@@ -34,6 +34,12 @@ if (isset($_POST['submit'])) {
 }
 ```
 
+### Validations present at the moment:
+- [x] Required
+- [x] Email
+- [x] Cpf
+- [x] Cnpj
+
 ### Developers
 * [Rodinei Teixeira] - Developer
 
