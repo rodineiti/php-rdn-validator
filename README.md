@@ -29,6 +29,8 @@ if (isset($_POST['submit'])) {
 	$validator = (new Validator($_POST, $rules))->passes();
 
 	$errors = $validator->fails() ? $validator->getErrors() : [];
+	
+	var_dump($errors);
 }
 ```
 
