@@ -142,7 +142,7 @@ class Validator
         $value = trim($this->data[$field]);
 
         if (!(new Email($value))->run()) {
-            $this->addError($field, 'email must be a valid email');
+            $this->addError($field, 'email');
         }
     }
 
@@ -155,7 +155,7 @@ class Validator
         $value = trim($this->data[$field]);
 
         if (!(new Cpf($value))->run()) {
-            $this->addError($field, 'cpf is invalid');
+            $this->addError($field, 'cpf');
         }
     }
 
@@ -168,7 +168,7 @@ class Validator
         $value = trim($this->data[$field]);
 
         if (!(new Cnpj($value))->run()) {
-            $this->addError($field, 'cnpj is invalid');
+            $this->addError($field, 'cnpj');
         }
     }
 

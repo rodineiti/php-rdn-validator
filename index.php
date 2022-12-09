@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
 	];
 
     $messages = [
-        'required' => 'This field is required',
+        'required' => 'This :field is required',
         'email' => 'This email is invalid',
         'cpf' => 'This CPF is inválid',
         'cnpj' => 'This CNPJ is invalid'

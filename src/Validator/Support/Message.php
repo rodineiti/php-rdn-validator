@@ -30,9 +30,9 @@ class Message
     }
 
     /**
-     * @return array|mixed|string|string[]
+     * @return string
      */
-    public function get()
+    public function get(): string
     {
         return match ($this->type) {
             'required' => $this->getMessage() ?? "{$this->field} is required",
@@ -42,9 +42,9 @@ class Message
     }
 
     /**
-     * @return array|mixed|string|string[]|null
+     * @return string|null
      */
-    private function getMessage()
+    private function getMessage(): string|null
     {
         $message = $this->messages[$this->type] ?? null;
 
