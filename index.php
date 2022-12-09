@@ -12,7 +12,14 @@ if (isset($_POST['submit'])) {
         'cnpj' => ['required','cnpj'],
 	];
 
-	$validator = (new Validator($_POST, $rules))->passes();
+    $messages = [
+        'required' => 'This :field is required',
+        'email' => 'This email is invalid',
+        'cpf' => 'This CPF is inválid',
+        'cnpj' => 'This CNPJ is invalid'
+    ];
+
+	$validator = (new Validator($_POST, $rules, $messages))->passes();
 
 	$errors = $validator->fails() ? $validator->getErrors() : [];
 }
