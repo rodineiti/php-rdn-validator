@@ -20,13 +20,20 @@ use RdnValidator\Validator\Validator;
 
 if (isset($_POST['submit'])) {
 	$rules = [
-		'username' => ['required'],
-		'email' => 'required|email',
-        'cpf' => 'required|cpf',
-        'cnpj' => ['required','cnpj'],
+	    'username' => ['required'],
+	    'email' => 'required|email',
+            'cpf' => 'required|cpf',
+            'cnpj' => ['required','cnpj'],
 	];
+	
+	$messages = [
+            'required' => 'This :field is required',
+            'email' => 'This email is invalid',
+            'cpf' => 'This CPF is inválid',
+            'cnpj' => 'This CNPJ is invalid'
+        ];
 
-	$validator = (new Validator($_POST, $rules))->passes();
+	$validator = (new Validator($_POST, $rules, $messages))->passes();
 
 	$errors = $validator->fails() ? $validator->getErrors() : [];
 	
