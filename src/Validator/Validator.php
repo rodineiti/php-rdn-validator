@@ -6,6 +6,7 @@ use RdnValidator\Validator\Rules\Cnpj;
 use RdnValidator\Validator\Rules\Cpf;
 use RdnValidator\Validator\Rules\Email;
 use RdnValidator\Validator\Rules\Required;
+use RdnValidator\Validator\Support\Message;
 
 /**
  * Class to Validator forms
@@ -32,15 +33,20 @@ class Validator
      * @var array|string[]
      */
     protected array $alloweds = ['required', 'email', 'cpf', 'cnpj'];
+    /**
+     * @var array
+     */
+    private array $messages = [];
 
     /**
      * @param array $formData
      * @param array $fields
      */
-    public function __construct(array $formData, array $fields)
+    public function __construct(array $formData, array $fields, array $messages = [])
     {
         $this->data = $formData;
         $this->fields = $fields;
+        $this->messages = $messages;
     }
 
     /**
@@ -123,7 +129,7 @@ class Validator
         $value = trim($this->data[$field]);
 
         if ((new Required($value))->run()) {
-            $this->addError($field, "{$field} cannout be empty");
+            $this->addError($field, "required");
         }
     }
 
@@ -168,15 +174,17 @@ class Validator
 
     /**
      * @param string $field
-     * @param string $message
+     * @param string $type
      * @return void
      */
-    private function addError(string $field, string $message): void
+    private function addError(string $field, string $type): void
     {
+        $message = new Message($field, $type, $this->messages);
+
         if (!isset($this->errors[$field])) {
-            $this->errors[$field] = [$message];
+            $this->errors[$field] = [$message->get()];
         } else {
-            $this->errors[$field][] = $message;
+            $this->errors[$field][] = $message->get();
         }
     }
 
