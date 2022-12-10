@@ -79,7 +79,7 @@ class Validator
     private function validateForm(): static
     {
         foreach ($this->fields as $field => $rules) {
-            if (is_string($rules) && str_contains($rules, '|')) {
+            if (is_string($rules)) {
                 $rules = explode("|", $rules);
             }
 
