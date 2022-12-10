@@ -76,7 +76,7 @@ class Validator
     /**
      * @return $this
      */
-    private function validateForm(): static
+    private function validateForm(): self
     {
         foreach ($this->fields as $field => $rules) {
             if (is_string($rules)) {
