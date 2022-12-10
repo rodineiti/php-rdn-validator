@@ -9,14 +9,9 @@ use RdnValidator\Validator\Validator;
 class ValidatorTest extends TestCase
 {
     /**
-     * @var Validator
-     */
-    protected $validator;
-
-    /**
      * @return void
      */
-    public function testValidateFail()
+    public function testValidateFail(): void
     {
         $form = [
             'username' => '',
@@ -24,25 +19,20 @@ class ValidatorTest extends TestCase
             'cpf' => '',
             'cnpj' => '',
         ];
-
         $rules = [
             'username' => ['required'],
             'email' => 'required|email',
             'cpf' => 'required|cpf',
-            'cnpj' => ['required','cnpj'],
+            'cnpj' => ['required', 'cnpj'],
         ];
 
-        $this->validator = new Validator($form, $rules);
-
-        $hasError = $this->validator->passes()->fails();
-
-        $this->assertTrue($hasError);
+        $this->assertTrue(Validator::passes($form, $rules)->fails());
     }
 
     /**
      * @return void
      */
-    public function testValidateRequiredWithErrors()
+    public function testValidateRequiredWithErrors(): void
     {
         $form = ['username' => ''];
 
@@ -50,21 +40,16 @@ class ValidatorTest extends TestCase
             'username' => ['required'],
         ];
 
-        $this->validator = new Validator($form, $rules);
+        $validator = Validator::passes($form, $rules);
 
-        $hasError = $this->validator->passes()->fails();
-
-        $errors = $this->validator->getErrors();
-
-        $this->assertTrue($hasError);
-
-        $this->assertCount(1, $errors);
+        $this->assertTrue($validator->fails());
+        $this->assertCount(1, $validator->getErrors());
     }
 
     /**
      * @return void
      */
-    public function testValidateRequiredWithoutErrors()
+    public function testValidateRequiredWithoutErrors(): void
     {
         $form = ['username' => 'test username'];
 
@@ -72,21 +57,16 @@ class ValidatorTest extends TestCase
             'username' => ['required'],
         ];
 
-        $this->validator = new Validator($form, $rules);
+        $validator = Validator::passes($form, $rules);
 
-        $hasError = $this->validator->passes()->fails();
-
-        $errors = $this->validator->getErrors();
-
-        $this->assertFalse($hasError);
-
-        $this->assertCount(0, $errors);
+        $this->assertFalse($validator->fails());
+        $this->assertCount(0, $validator->getErrors());
     }
 
     /**
      * @return void
      */
-    public function testValidateEmailWithErrors()
+    public function testValidateEmailWithErrors(): void
     {
         $form = ['email' => ''];
 
@@ -94,21 +74,16 @@ class ValidatorTest extends TestCase
             'email' => ['email'],
         ];
 
-        $this->validator = new Validator($form, $rules);
+        $validator = Validator::passes($form, $rules);
 
-        $hasError = $this->validator->passes()->fails();
-
-        $errors = $this->validator->getErrors();
-
-        $this->assertTrue($hasError);
-
-        $this->assertCount(1, $errors);
+        $this->assertTrue($validator->fails());
+        $this->assertCount(1, $validator->getErrors());
     }
 
     /**
      * @return void
      */
-    public function testValidateEmailWithoutErrors()
+    public function testValidateEmailWithoutErrors(): void
     {
         $form = ['email' => 'rodinei@teste.com'];
 
@@ -116,21 +91,16 @@ class ValidatorTest extends TestCase
             'email' => ['email'],
         ];
 
-        $this->validator = new Validator($form, $rules);
+        $validator = Validator::passes($form, $rules);
 
-        $hasError = $this->validator->passes()->fails();
-
-        $errors = $this->validator->getErrors();
-
-        $this->assertFalse($hasError);
-
-        $this->assertCount(0, $errors);
+        $this->assertFalse($validator->fails());
+        $this->assertCount(0, $validator->getErrors());
     }
 
     /**
      * @return void
      */
-    public function testValidateCpfWithErrors()
+    public function testValidateCpfWithErrors(): void
     {
         $form = ['cpf' => ''];
 
@@ -138,21 +108,17 @@ class ValidatorTest extends TestCase
             'cpf' => ['cpf'],
         ];
 
-        $this->validator = new Validator($form, $rules);
+        $validator = Validator::passes($form, $rules);
 
-        $hasError = $this->validator->passes()->fails();
+        $this->assertTrue($validator->fails());
 
-        $errors = $this->validator->getErrors();
-
-        $this->assertTrue($hasError);
-
-        $this->assertCount(1, $errors);
+        $this->assertCount(1, $validator->getErrors());
     }
 
     /**
      * @return void
      */
-    public function testValidateCpfWithoutErrors()
+    public function testValidateCpfWithoutErrors(): void
     {
         $form = ['cpf' => '12345678909'];
 
@@ -160,21 +126,16 @@ class ValidatorTest extends TestCase
             'cpf' => ['cpf'],
         ];
 
-        $this->validator = new Validator($form, $rules);
+        $validator = Validator::passes($form, $rules);
 
-        $hasError = $this->validator->passes()->fails();
-
-        $errors = $this->validator->getErrors();
-
-        $this->assertFalse($hasError);
-
-        $this->assertCount(0, $errors);
+        $this->assertFalse($validator->fails());
+        $this->assertCount(0, $validator->getErrors());
     }
 
     /**
      * @return void
      */
-    public function testValidateCnpjWithErrors()
+    public function testValidateCnpjWithErrors(): void
     {
         $form = ['cnpj' => ''];
 
@@ -182,21 +143,16 @@ class ValidatorTest extends TestCase
             'cnpj' => ['cnpj'],
         ];
 
-        $this->validator = new Validator($form, $rules);
+        $validator = Validator::passes($form, $rules);
 
-        $hasError = $this->validator->passes()->fails();
-
-        $errors = $this->validator->getErrors();
-
-        $this->assertTrue($hasError);
-
-        $this->assertCount(1, $errors);
+        $this->assertTrue($validator->fails());
+        $this->assertCount(1, $validator->getErrors());
     }
 
     /**
      * @return void
      */
-    public function testValidateCnpjWithoutErrors()
+    public function testValidateCnpjWithoutErrors(): void
     {
         $form = ['cnpj' => '90942778000102'];
 
@@ -204,14 +160,45 @@ class ValidatorTest extends TestCase
             'cnpj' => ['cnpj'],
         ];
 
-        $this->validator = new Validator($form, $rules);
+        $validator = Validator::passes($form, $rules);
 
-        $hasError = $this->validator->passes()->fails();
+        $this->assertFalse($validator->fails());
+        $this->assertCount(0, $validator->getErrors());
+    }
 
-        $errors = $this->validator->getErrors();
+    public function testValidateRequiredValueWithCustomMessage(): void
+    {
+        $required = 'Custom message for required';
 
-        $this->assertFalse($hasError);
+        $form = [
+            'value' => ''
+        ];
+        $rules = [
+            'value' => 'required'
+        ];
 
-        $this->assertCount(0, $errors);
+        $validator = Validator::passes($form, $rules, compact('required'));
+
+        $this->assertTrue($validator->fails());
+        $this->assertCount(1, $validator->getErrors());
+        $this->assertEquals($required, $validator->getError('value'));
+    }
+
+    public function testValidateCustomMessageWithoutErrors(): void
+    {
+        $required = 'Custom message for required';
+
+        $form = [
+            'value' => 'some test'
+        ];
+        $rules = [
+            'value' => 'required'
+        ];
+
+        $validator = Validator::passes($form, $rules, compact('required'));
+
+        $this->assertFalse($validator->fails());
+        $this->assertCount(0, $validator->getErrors());
+        $this->assertEmpty($validator->getError('value'));
     }
 }

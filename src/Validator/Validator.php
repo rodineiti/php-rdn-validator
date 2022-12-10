@@ -52,9 +52,10 @@ class Validator
     /**
      * @return $this
      */
-    public function passes(): static
+    public static function passes(array $formData, array $fields, array $messages = []): self
     {
-        return $this->validateForm();
+        $instance = new self($formData, $fields, $messages);
+        return $instance->validateForm();
     }
 
     /**
@@ -63,6 +64,15 @@ class Validator
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    /**
+     * @param string $key
+     * @return string|null
+     */
+    public function getError(string $key): string|null
+    {
+        return $this->errors[$key][0] ?? null;
     }
 
     /**
@@ -76,16 +86,14 @@ class Validator
     /**
      * @return $this
      */
-    private function validateForm(): static
+    private function validateForm(): self
     {
         foreach ($this->fields as $field => $rules) {
-            if (is_string($rules) && str_contains($rules, '|')) {
+            if (is_string($rules)) {
                 $rules = explode("|", $rules);
             }
 
-            if (is_array($rules)) {
-                $this->validateField($field, $rules);
-            }
+            $this->validateField($field, $rules);
         }
 
         return $this;
