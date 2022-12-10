@@ -52,9 +52,10 @@ class Validator
     /**
      * @return $this
      */
-    public function passes(): static
+    public static function passes(array $formData, array $fields, array $messages = []): self
     {
-        return $this->validateForm();
+        $instance = new self($formData, $fields, $messages);
+        return $instance->validateForm();
     }
 
     /**
