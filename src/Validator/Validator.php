@@ -83,9 +83,7 @@ class Validator
                 $rules = explode("|", $rules);
             }
 
-            if (is_array($rules)) {
-                $this->validateField($field, $rules);
-            }
+            $this->validateField($field, $rules);
         }
 
         return $this;
