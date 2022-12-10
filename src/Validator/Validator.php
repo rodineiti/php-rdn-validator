@@ -66,6 +66,15 @@ class Validator
     }
 
     /**
+     * @param string $key
+     * @return string|null
+     */
+    public function getError(string $key): string|null
+    {
+        return $this->errors[$key][0] ?? null;
+    }
+
+    /**
      * @return bool
      */
     public function fails(): bool
