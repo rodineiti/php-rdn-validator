@@ -8,10 +8,9 @@ To install the library, run the following command:
 composer require rodineiti/php-rdn-validator
 ```
 
-
 To use the library, simply require the composer to autoload, invoke the class and call the method:
 
-```sh
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -20,34 +19,36 @@ use RdnValidator\Validator\Validator;
 
 if (isset($_POST['submit'])) {
 	$rules = [
-	    'username' => ['required'],
+	    'username' => 'required',
 	    'email' => 'required|email',
-            'cpf' => 'required|cpf',
-            'cnpj' => ['required','cnpj'],
+	    'cpf' => 'required|cpf',
+	    'cnpj' => ['required','cnpj'],
 	];
-	
 	$messages = [
-            'required' => 'This :field is required',
-            'email' => 'This email is invalid',
-            'cpf' => 'This CPF is inválid',
-            'cnpj' => 'This CNPJ is invalid'
-        ];
+	    'required' => 'This :field is required',
+	    'email' => 'This email is invalid',
+	    'cpf' => 'This CPF is inválid',
+	    'cnpj' => 'This CNPJ is invalid'
+	];
 
-	$validator = (new Validator($_POST, $rules, $messages))->passes();
+	$validator = Validator::passes($_POST, $rules, $messages);
 
 	$errors = $validator->fails() ? $validator->getErrors() : [];
 	
 	var_dump($errors);
+	var_dump($validator->getError('username')) // This username is required
 }
 ```
 
 ### Validations present at the moment:
+
 - [x] Required
 - [x] Email
 - [x] Cpf
 - [x] Cnpj
 
 ### Developers
+
 * [Rodinei Teixeira] - Developer
 
 License
@@ -56,4 +57,5 @@ License
 MIT
 
 [//]:#
+
 [Rodinei Teixeira]: <mailto:rodinei.developer@hotmail.com>
