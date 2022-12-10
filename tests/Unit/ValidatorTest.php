@@ -165,4 +165,40 @@ class ValidatorTest extends TestCase
         $this->assertFalse($validator->fails());
         $this->assertCount(0, $validator->getErrors());
     }
+
+    public function testValidateRequiredValueWithCustomMessage(): void
+    {
+        $required = 'Custom message for required';
+
+        $form = [
+            'value' => ''
+        ];
+        $rules = [
+            'value' => 'required'
+        ];
+
+        $validator = Validator::passes($form, $rules, compact('required'));
+
+        $this->assertTrue($validator->fails());
+        $this->assertCount(1, $validator->getErrors());
+        $this->assertEquals($required, $validator->getError('value'));
+    }
+
+    public function testValidateCustomMessageWithoutErrors(): void
+    {
+        $required = 'Custom message for required';
+
+        $form = [
+            'value' => 'some test'
+        ];
+        $rules = [
+            'value' => 'required'
+        ];
+
+        $validator = Validator::passes($form, $rules, compact('required'));
+
+        $this->assertFalse($validator->fails());
+        $this->assertCount(0, $validator->getErrors());
+        $this->assertEmpty($validator->getError('value'));
+    }
 }
